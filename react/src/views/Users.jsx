@@ -30,9 +30,8 @@ export default function Users() {
             .then(({ data }) => {
                 setLoading(false);
                 setUsers(data.data);
-                console.log(data);
             })
-            .catch(() => {
+            .catch((err) => {
                 setLoading(false);
             });
     }
@@ -45,11 +44,13 @@ export default function Users() {
             <div className='card animated fadeInDown'>
                 <table>
                     <thead>
-                        <th>ID</th>
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th>Created Date</th>
-                        <th>Actions</th>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Created Date</th>
+                            <th>Actions</th>
+                        </tr>
                     </thead>
                     {loading &&
                         <tbody>
@@ -63,7 +64,7 @@ export default function Users() {
                     {!loading &&
                         <tbody>
                             {users.map(u => (
-                                <tr>
+                                <tr key={u.id}>
                                     <td>{u.id}</td>
                                     <td>{u.name}</td>
                                     <td>{u.email}</td>
